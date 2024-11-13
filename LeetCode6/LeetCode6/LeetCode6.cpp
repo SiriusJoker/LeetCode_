@@ -1,6 +1,6 @@
 // LeetCode6.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-
+// https://leetcode.com/problems/zigzag-conversion/description/
 #include <iostream>
 #include <string>
 
@@ -9,15 +9,23 @@ class Solution {
 public:
     string convert(string s, int numRows) {
         string converted_str = "";
-        if (numRows == 1 || s.size() == 1) {
+        if (numRows == 1 || s.size() == 1 || s.size()<=numRows) {
             return s;
         }
         for (int cur_row = 1; cur_row <= numRows; cur_row++) {
             int i = cur_row - 1;
             if (i >= s.size())
                 break;
+
+            // first element of each row is s[number of row -1]
+
             converted_str += s[i];
             while (i < s.size()) {
+
+                //processing boundary conditions first and last row
+                // every other row will have two elements 
+                // before finding current element to add to converted_str
+
                 if (cur_row == 1 || cur_row == numRows) {
                     i += (numRows - 2) * 2 + 2;
                     if (i < s.size())
@@ -26,6 +34,12 @@ public:
                         break;
                 }
                 else
+
+                    //processing inner rows
+                    // last and first rows will have 1 element
+                    // while the inner rows will have two elements 
+                    // before finding current element to add to converted_str
+
                 {
                     i += 2 + (numRows - cur_row - 1) * 2;
                     if (i < s.size())
@@ -48,14 +62,3 @@ int main()
     Solution s;
     std::cout << s.convert("AB",3) << "\n";
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
