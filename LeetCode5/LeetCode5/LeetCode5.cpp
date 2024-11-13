@@ -25,15 +25,11 @@ public:
 
         // Starting from the beginning and end of the string to check for palindromes inside
 
-        for (int i = 0; i < s.size(); i++) {
-            for (int j = s.size() - 1; j > i; j--)
+        for (int i = 0; i < s.size()-1; i++) {
+            for (int j = s.size() - 1; j > i && j - i >= palindrome.size(); j--)
             {
                 // If number of characters is less then current palindrome, its not worth considering
-                    // !!! This may be a point where optimization can be applied
 
-                if (j - i < palindrome.size()) {
-                    break;
-                }
                 if (s[i] == s[j])
                 {
                     is_palindrome = true;
